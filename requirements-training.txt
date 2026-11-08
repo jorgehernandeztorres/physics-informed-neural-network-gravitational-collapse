@@ -1,0 +1,3 @@
+-r requirements.txt
+# Only needed for running the archived PyTorch model variant.
+torch>=2.1,<3.0

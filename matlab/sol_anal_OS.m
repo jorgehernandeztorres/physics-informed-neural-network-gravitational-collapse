@@ -37,8 +37,9 @@ t_vector = linspace(0,t_max,n_times);
 %% CÁLCULO DE chi Y r
 
 % 1. Invertir t=t(eta_s)
-eta_s_values = calcular_eta_s_fzero(t_vector, M, chi_s); % No me fío de que
-% ChatGPT haya calculado bien la derivada que toca para usar Newton-Raphson
+eta_s_values = calcular_eta_s_fzero(t_vector, M, chi_s);
+% Se utiliza fzero en lugar de Newton-Raphson para evitar
+% depender de una derivada que no ha sido verificada
 
 % 2. Hallar eta_c=eta_c(eta_s)
 eta_c_values = relacion_eta_c(eta_s_values, chi_s);

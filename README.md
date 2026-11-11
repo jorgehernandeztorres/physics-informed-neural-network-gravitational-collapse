@@ -1,11 +1,11 @@
 # Physics-Informed Neural Network for Gravitational Collapse
 
-**Bachelor's Thesis in Physics (2025)** | Jorge Hernandez Torres  
+**Bachelor's Thesis in Physics (2025)** | Jorge Hernández Torres  
 **Python · PyTorch · Physics-Informed Neural Networks · Automatic Differentiation · General Relativity**
 
 This academic research project explores whether a **physics-informed neural network (PINN)** can approximate the **Oppenheimer-Snyder gravitational-collapse model**. The model describes the spherical collapse of an idealized, pressureless star and provides analytical reference solutions against which neural-network predictions can be evaluated.
 
-The work combines analytical modeling, nonlinear physical constraints, neural-network design, differentiable residuals, and numerical evaluation. The original thesis was completed as part of a double degree in Mathematics and Physics at the **Universitat de Valencia**, with a Physics thesis grade of **9.4/10**.
+The work combines analytical modeling, nonlinear physical constraints, neural-network design, differentiable residuals, and numerical evaluation. The original thesis was completed as part of a double degree in Mathematics and Physics at the **Universitat de València**, with a Physics thesis grade of **9.4/10**.
 
 ![Comparison between the theoretical solution and a PINN prediction for the lapse](assets/Figure_alpha.png)
 
@@ -33,7 +33,7 @@ Instead of fitting labeled observations alone, a PINN uses **automatic different
 4. Training and comparing model predictions with the analytical solution.
 5. Identifying numerical and computational limitations.
 
-The thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. **Important:** the thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. The original thesis-output formulation `(alpha, X, rho0, v)` has since been recovered and is preserved in [`research_code/thesis_formulation/`](research_code/thesis_formulation/). A separate experimental formulation `(alpha, m, rho0, v)` is also retained for research provenance; see [Code provenance and limitations](#code-provenance-and-limitations).
+The thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. The original thesis-output formulation `(alpha, X, rho0, v)` has since been recovered and is preserved in [`research_code/thesis_formulation/`](research_code/thesis_formulation/). A separate experimental formulation `(alpha, m, rho0, v)` is also retained for research provenance; see [Code provenance and limitations](#code-provenance-and-limitations).
 
 ## Results: strengths and limitations
 
@@ -48,7 +48,7 @@ The final archived prediction array matches the relative L2 errors reported in t
 
 As an additional sanity check, the constant baseline `X = 1` achieves a relative L2 error of approximately 0.0865 on the same reference grid, outperforming the PINN's result for `X` (0.1505). This highlights the importance of evaluating scientific ML predictions against simple baselines rather than relying only on relative errors between modeled quantities.
 
-These values are **not** evidence that the model solves gravitational collapse to high accuracy. In particular, density and velocity remain poorly approximated. The thesis also reports a substantial computational cost (about 4,995 seconds for its final L-BFGS-B stage on a Colab T4 GPU). The project was valuable as an investigation of PINN design and failure modes, not as a faster or more accurate replacement for established solvers.
+These values are **not** evidence that the model solves gravitational collapse to high accuracy. In particular, density and velocity remain poorly approximated. The thesis reports a substantial computational cost (about 4,995 seconds for its final L-BFGS-B stage in a Colab environment equipped with a T4 GPU). The archived script does not establish whether GPU acceleration was actually used. The project was valuable as an investigation of PINN design and failure modes, not as a faster or more accurate replacement for established solvers.
 
 | Mass profile | Density error |
 | --- | --- |
@@ -88,6 +88,17 @@ The command saves figures in `outputs/` (ignored by Git). To run the automated n
 python -m unittest discover -s tests -v
 ```
 
+### Check the recovered thesis model
+
+The original thesis-output implementation can also be checked with a **small one-step PyTorch smoke test** (not a reproduction of the final training):
+
+```bash
+python -m pip install -r requirements-training.txt
+python scripts/smoke_test_thesis_formulation.py
+```
+
+This check requires the original files under `research_code/thesis_formulation/`. The historical `main.py` is preserved for research provenance and is **not** a ready-to-run command in the reorganized repository.
+
 ## Repository structure
 
 ```text
@@ -112,7 +123,7 @@ A [lightweight smoke test](scripts/smoke_test_thesis_formulation.py) successfull
 
 A separate experimental formulation `(alpha, m, rho0, v)` is preserved in `research_code/`. Its training scripts and output parametrization differ from the thesis formulation and should not be treated as interchangeable.
 
-The reproducible scientific results currently provided are the evaluation metrics and plots computed from the archived final predictions and analytical reference data. The MATLAB reference-generation scripts are also preserved, but their complete execution has not been independently revalidated.
+The reproducible scientific results currently provided are the evaluation metrics and plots computed from the archived final predictions and analytical reference data. The MATLAB reference-generation scripts are also preserved, but their complete execution has not been independently revalidated. The recovered historical training code also contains known sampling inconsistencies, documented in `research_code/thesis_formulation/README.md`; it should not be presented as a validated reproduction of the physical domain.
 
 For details, see [`research_code/README.md`](research_code/README.md) and [`research_code/thesis_formulation/README.md`](research_code/thesis_formulation/README.md).
 

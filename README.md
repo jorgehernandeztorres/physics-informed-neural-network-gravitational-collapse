@@ -86,6 +86,14 @@ The command saves figures in `outputs/` (ignored by Git). To run the automated n
 python -m unittest discover -s tests -v
 ```
 
+### Recovered thesis formulation
+
+The original 2025 source code for the thesis-output formulation `(alpha, X, rho0, v)` is available in [`research_code/thesis_formulation/`](research_code/thesis_formulation/).
+
+A lightweight [smoke test](scripts/smoke_test_thesis_formulation.py) verifies that the recovered model can compute its physics-based loss, backpropagate gradients, and complete an Adam optimization step.
+
+The final archived predictions can be evaluated reproducibly. However, a full reproduction of the original training remains unverified. The historical training script is preserved for research provenance rather than presented as a ready-to-run training pipeline.
+
 ## Repository structure
 
 ```text

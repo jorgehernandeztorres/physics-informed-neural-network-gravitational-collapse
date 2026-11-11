@@ -33,7 +33,7 @@ Instead of fitting labeled observations alone, a PINN uses **automatic different
 4. Training and comparing model predictions with the analytical solution.
 5. Identifying numerical and computational limitations.
 
-The thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. **Important:** the surviving Python training files include a different, later/experimental output parametrization; see [Code provenance and limitations](#code-provenance-and-limitations).
+The thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. **Important:** the thesis describes a four-hidden-layer network (100 units per layer), SiLU activations, and staged Adam/L-BFGS-B optimization. The original thesis-output formulation `(alpha, X, rho0, v)` has since been recovered and is preserved in [`research_code/thesis_formulation/`](research_code/thesis_formulation/). A separate experimental formulation `(alpha, m, rho0, v)` is also retained for research provenance; see [Code provenance and limitations](#code-provenance-and-limitations).
 
 ## Results: strengths and limitations
 

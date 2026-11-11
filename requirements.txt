@@ -1,4 +1,4 @@
 # For evaluation and plotting of archived thesis predictions (no GPU needed)
-numpy>=1.24,<2.0
-scipy>=1.10,<2.0
-matplotlib>=3.7,<4.0
+numpy>=2.1,<3.0
+scipy>=1.14.1,<2.0
+matplotlib>=3.10,<4.0

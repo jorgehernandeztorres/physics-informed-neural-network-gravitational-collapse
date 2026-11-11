@@ -86,14 +86,6 @@ The command saves figures in `outputs/` (ignored by Git). To run the automated n
 python -m unittest discover -s tests -v
 ```
 
-### Recovered thesis formulation
-
-The original 2025 source code for the thesis-output formulation `(alpha, X, rho0, v)` is available in [`research_code/thesis_formulation/`](research_code/thesis_formulation/).
-
-A lightweight [smoke test](scripts/smoke_test_thesis_formulation.py) verifies that the recovered model can compute its physics-based loss, backpropagate gradients, and complete an Adam optimization step.
-
-The final archived predictions can be evaluated reproducibly. However, a full reproduction of the original training remains unverified. The historical training script is preserved for research provenance rather than presented as a ready-to-run training pipeline.
-
 ## Repository structure
 
 ```text
@@ -110,26 +102,17 @@ requirements-training.txt  Additional PyTorch dependency for model inspection
 
 ## Code provenance and limitations
 
-**The archived final predictions and the surviving model source are not the same experiment.** In the thesis, the network outputs `(alpha, X, rho0, v)`. The preserved `research_code/PINN_OS_4.py` instead outputs `(alpha, m, rho0, v)`, and `research_code/main_3.py` imports an unavailable filename (`PINN_OS`). Some auxiliary scripts also refer to earlier output formats or filenames. They are provided as **historical research artifacts**, not as a verified end-to-end reproduction of the thesis run.
+The original thesis-output formulation `(alpha, X, rho0, v)` has been recovered from the 2025 research workspace and is preserved in [`research_code/thesis_formulation/`](research_code/thesis_formulation/).
 
-The independently reproducible result in this repository is **evaluation of the supplied final prediction array against the analytical reference grid**. Retraining the exact final model would require recovering or reconstructing the matching training source, hyperparameters and weights. Please do not interpret the archived code as a ready-to-run production library.
+The recovered training script references the same prediction filename as the archived final results. However, the original trained weights, complete training logs, and exact software environment are unavailable. Therefore, an exact end-to-end reproduction of the final training has not been verified.
 
-For a minimal forward/backward check of the surviving PyTorch variant (not a thesis reproduction):
+A [lightweight smoke test](scripts/smoke_test_thesis_formulation.py) successfully checks the recovered model's physics-based loss, gradient computation, and one Adam optimization step. This does not reproduce the original training results.
 
-```bash
-pip install -r requirements-training.txt
-python scripts/smoke_test_archived_variant.py
-```
+A separate experimental formulation `(alpha, m, rho0, v)` is preserved in `research_code/`. Its training scripts and output parametrization differ from the thesis formulation and should not be treated as interchangeable.
 
-A small **training-loop sanity check** of the surviving variant is also available:
+The reproducible scientific results currently provided are the evaluation metrics and plots computed from the archived final predictions and analytical reference data. The MATLAB reference-generation scripts are also preserved, but their complete execution has not been independently revalidated.
 
-```bash
-python scripts/train_archived_variant.py --epochs 1 --collocation 16 --width 8 --hidden-layers 2
-```
-
-This quick run uses randomly initialized parameters and intentionally produces no scientifically meaningful solution. It can expose very large physics residuals; that is expected for an untrained model. You can explicitly choose larger settings, but full scientific training is computationally demanding and does **not** recreate the thesis's final architecture.
-
-The MATLAB scripts document the construction of the reference data. Generating the stored `OS.mat` from scratch requires a compatible MATLAB environment and was not retested for this repository.
+For details, see [`research_code/README.md`](research_code/README.md) and [`research_code/thesis_formulation/README.md`](research_code/thesis_formulation/README.md).
 
 ## What I learned
 

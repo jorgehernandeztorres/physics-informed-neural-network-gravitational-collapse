@@ -46,6 +46,8 @@ The final archived prediction array matches the relative L2 errors reported in t
 | Rest-mass density `rho0` | **10.9334** | Large errors in strongly nonlinear regions |
 | Fluid velocity `v` | **0.9997** | Poor quantitative accuracy near extreme collapse |
 
+As an additional sanity check, the constant baseline `X = 1` achieves a relative L2 error of approximately 0.0865 on the same reference grid, outperforming the PINN's result for `X` (0.1505). This highlights the importance of evaluating scientific ML predictions against simple baselines rather than relying only on relative errors between modeled quantities.
+
 These values are **not** evidence that the model solves gravitational collapse to high accuracy. In particular, density and velocity remain poorly approximated. The thesis also reports a substantial computational cost (about 4,995 seconds for its final L-BFGS-B stage on a Colab T4 GPU). The project was valuable as an investigation of PINN design and failure modes, not as a faster or more accurate replacement for established solvers.
 
 | Mass profile | Density error |
